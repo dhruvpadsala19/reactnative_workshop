@@ -1,12 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Dashboard from "./src/screens/Dashboard";
+import Dashboard from "../dashboard";
+import Profile from "./profile";
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <StatusBar style="dark" />
-      <Dashboard />
+      <Profile />
     </SafeAreaProvider>
   );
 }
