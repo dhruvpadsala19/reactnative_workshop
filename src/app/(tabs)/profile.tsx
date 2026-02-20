@@ -5,7 +5,7 @@ export default function Profile() {
     return(
         <View>
             <Text>On Profile Screen</Text>
-            <Link href="/"></Link>
+            <Link href="/modal">Open modal</Link>
         </View>
     );
 }

@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Habit } from "../../types/types";
-import HabitItem from "../../components/HabitItem";
+import { Habit } from "../../../types/types";
+import HabitItem from "../../../components/HabitItem";
+import { FAB } from "../../../components/FAB";
+import { Link } from "expo-router";
 
 const initialHabits: Habit[] = [
   { id: "1", name: "Drink Water", completed: false },
@@ -62,6 +64,9 @@ const Dashboard: React.FC = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
       />
+      <Link href={"/add-habit"} asChild>
+        <FAB onPress={() => {}} />
+      </Link>
     </View>
   );
 };
