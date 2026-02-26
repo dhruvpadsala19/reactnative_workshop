@@ -5,9 +5,6 @@ import { Habit } from "../../../types/types";
 import HabitItem from "../../../components/HabitItem";
 import { FAB } from "../../../components/FAB";
 import { Link } from "expo-router";
-import BottomSheet, { BottomSheetModal } from "@gorhom/bottom-sheet";
-import AddHabitSheet from "../../../components/AddHabitSheet";
-import Animated from "react-native-reanimated";
 
 const initialHabits: Habit[] = [
   { id: "1", name: "Drink Water", completed: false },
@@ -19,21 +16,6 @@ const initialHabits: Habit[] = [
 const Dashboard: React.FC = () => {
   const insets = useSafeAreaInsets();
   const [habits, setHabits] = useState<Habit[]>(initialHabits);
-  const addHabitSheetRef = useRef<BottomSheetModal>(null);
-  const snapPoints = useMemo(() => ["50%"], []);
-  console.log("Reanimated:", Animated);
-
-  useEffect(() => {
-  addHabitSheetRef.current?.expand();
-}, []);
-
-  const openAddHabitSheet = () => {
-    addHabitSheetRef?.current?.expand();
-  }
-
-   const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
 
   const completedCount = useMemo(
     () => habits.filter((h) => h.completed).length,
@@ -82,21 +64,9 @@ const Dashboard: React.FC = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
       />
-      <FAB onPress={openAddHabitSheet} />
-      <BottomSheetModal
-        ref={addHabitSheetRef}
-        snapPoints={snapPoints}
-        index={-1}
-        enablePanDownToClose
-        style={{ zIndex: 1000 }}
-        onChange={handleSheetChanges}
-      >
-        <View>
-          <Text>Inside bottom sheet</Text>
-        </View>
-      </BottomSheetModal>
-      
-      {/* <AddHabitSheet ref={addHabitSheetRef} /> */}
+      <Link href="/add-habit" asChild>
+        <FAB />
+      </Link>
     </View>
   );
 };
