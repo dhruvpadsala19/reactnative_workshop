@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, Button, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import * as Device from 'expo-device';
 
 type PickerMode = "date" | "time" | "datetime";
 
@@ -98,6 +99,12 @@ const AddHabit = () => {
                 minimumDate={date}
                 onConfirm={handleConfirm}
                 onCancel={() => setShowPicker(false)}
+                modalStyleIOS={styles.modalStyleIOS}
+                pickerStyleIOS={styles.pickerStyleIOS}
+                modalPropsIOS={{
+                supportedOrientations:
+                    ['portrait', 'landscape'],
+                }}
             />
         </View>
     );
@@ -116,12 +123,20 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 8,
         marginBottom: 20,
+        backgroundColor: "#fff",
     },
     selector: {
         padding: 12,
         backgroundColor: "#f0f0f0",
         borderRadius: 8,
         marginBottom: 15,
+    },
+    modalStyleIOS: {
+        width: Device.deviceType == Device.DeviceType.TABLET ? '50%' : '100%',
+        alignSelf: 'center',
+    },
+    pickerStyleIOS: {
+        alignSelf: 'center',
     },
 });
 
